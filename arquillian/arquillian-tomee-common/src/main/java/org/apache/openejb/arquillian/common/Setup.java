@@ -52,8 +52,8 @@ import static java.util.Collections.emptyMap;
 public class Setup {
     private static final Logger LOGGER = Logger.getLogger(Setup.class.getName()); // JUL is used by arquillian so that's fine
     public static final String TOMEE_BEAN_DISCOVERER_JAR = "lib" + File.separator + "xx-arquillian-tomee-bean-discoverer.jar"; // starts with xx to not be filtered
-    private static final String DEFAULT_MEM_CONFIG = (javaVersion() >= 1.8 ? "" : "-XX:PermSize=128m -XX:MaxPermSize=256m ")
-                                                            + "-Xmx768m -Xms256m -XX:ReservedCodeCacheSize=64m";
+    private static final String DEFAULT_MEM_CONFIG = (javaVersion() >= 1.8 ? "" : "-XX:PermSize=64m -XX:MaxPermSize=256m ")
+                                                            + "-Xmx512m -Xms256m -XX:ReservedCodeCacheSize=64m";
 
     private static double javaVersion() {
         try {
@@ -372,7 +372,7 @@ public class Setup {
                 .addManifest() // avoid NPE from org.apache.tomcat.util.scan.StandardJarScanner.processManifest()
                 .addClasses(BeanDicovererInstaller.class, TestClassDiscoverer.class, ArquillianFilterRunner.class, Discover.class)
                 .addAsManifestResource(new StringAsset(BeanDicovererInstaller.class.getName()), ArchivePaths.create("org.apache.openejb.extension"))
-                .as(ZipExporter.class).exportTo(destination, false);
+                .as(ZipExporter.class).exportTo(destination, true);
     }
 
     public static void removeArquillianBeanDiscoverer(final File home) {
