@@ -169,7 +169,7 @@
               </execution>
             </executions>
             <configuration>
-              <argLine>-Xmx768g -XX:PermSize=128m -XX:MaxPermSize=512m</argLine>
+              <argLine>-Xmx768m -XX:PermSize=128m -XX:MaxPermSize=512m</argLine>
               <skip>true</skip>
               <parallel>none</parallel>
               <threadCount>1</threadCount>
@@ -376,7 +376,7 @@
               </execution>
             </executions>
             <configuration>
-              <argLine>-Xmx768g -XX:PermSize=128m -XX:MaxPermSize=512m</argLine>
+              <argLine>-Xmx768m -XX:PermSize=128m -XX:MaxPermSize=512m</argLine>
               <skip>true</skip>
               <parallel>none</parallel>
               <threadCount>1</threadCount>
@@ -594,7 +594,7 @@
               </execution>
             </executions>
             <configuration>
-              <argLine>-Xmx768g -XX:PermSize=128m -XX:MaxPermSize=512m</argLine>
+              <argLine>-Xmx768m -XX:PermSize=128m -XX:MaxPermSize=512m</argLine>
               <skip>true</skip>
               <parallel>none</parallel>
               <threadCount>1</threadCount>
