@@ -31,7 +31,7 @@ import javax.ws.rs.client.ClientBuilder;
 
 import static org.junit.Assert.assertEquals;
 
-@Ignore
+
 @RunWith(Arquillian.class)
 public class OverridedClientTest {
     @Deployment
