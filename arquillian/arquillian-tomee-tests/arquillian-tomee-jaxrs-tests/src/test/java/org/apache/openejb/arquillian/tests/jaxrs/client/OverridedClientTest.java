@@ -23,6 +23,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,6 +31,7 @@ import javax.ws.rs.client.ClientBuilder;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore
 @RunWith(Arquillian.class)
 public class OverridedClientTest {
     @Deployment
