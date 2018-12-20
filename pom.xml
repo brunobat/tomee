@@ -547,6 +547,7 @@
         <module>container</module>
         <module>server</module>
         <module>mp-jwt</module>
+        <module>mp-fault-tolerance</module>
         <module>examples</module>
         <module>assembly</module>
         <module>tck</module>
@@ -575,6 +576,7 @@
         <module>container</module>
         <module>server</module>
         <module>mp-jwt</module>
+        <module>mp-fault-tolerance</module>
         <module>assembly</module>
         <module>arquillian</module>
         <module>utils</module>

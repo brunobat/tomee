@@ -20,24 +20,27 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>safeguard-parent</artifactId>
-        <groupId>org.apache.geronimo.safeguard</groupId>
-        <version>1.1-SNAPSHOT</version>
+        <groupId>org.apache.tomee</groupId>
+        <artifactId>mp-fault-tolerance-parent</artifactId>
+        <version>8.0.0-SNAPSHOT</version>
     </parent>
-    <name>Apache Safeguard :: MicroProfile TCK Tests</name>
+    <name>Apache Safeguard :: Implementation (Failsafe)</name>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>safeguard-tck-tests</artifactId>
+    <artifactId>mp-fault-tolerance-impl</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.eclipse.microprofile.fault-tolerance</groupId>
-            <artifactId>microprofile-fault-tolerance-tck</artifactId>
+            <groupId>org.apache.tomee</groupId>
+            <artifactId>mp-fault-tolerance-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.geronimo.safeguard</groupId>
-            <artifactId>safeguard-impl</artifactId>
-            <version>${project.version}</version>
+            <groupId>net.jodah</groupId>
+            <artifactId>failsafe</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.testng</groupId>
+            <artifactId>arquillian-testng-container</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
@@ -56,24 +59,20 @@
             <artifactId>geronimo-interceptor_1.2_spec</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.geronimo.config</groupId>
             <artifactId>geronimo-config-impl</artifactId>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
-                <configuration>
-                    <dependenciesToScan>
-                        <dependency>org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-tck</dependency>
-                    </dependenciesToScan>
-                    <excludes>
-                        <exclude>org.eclipse.microprofile.fault.tolerance.tck.ConfigTest</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
