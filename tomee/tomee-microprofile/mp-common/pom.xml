@@ -41,11 +41,16 @@
             <version>${microprofile.fault-tolerance.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.tomee</groupId>
             <artifactId>mp-fault-tolerance</artifactId>
             <version>${microprofile.fault-tolerance.impl.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+            <version>${microprofile.config.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
