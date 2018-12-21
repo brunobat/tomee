@@ -22,6 +22,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+  <modules>
+    <module>mp-fault-tolerance</module>
+  </modules>
 
   <parent>
     <groupId>org.apache</groupId>
@@ -203,7 +206,7 @@
     <microprofile.jwt.impl.version>${project.version}</microprofile.jwt.impl.version>
     <!-- 1.1 Implementation not started yet -->
     <microprofile.fault-tolerance.version>1.0</microprofile.fault-tolerance.version>
-    <microprofile.fault-tolerance.impl.version>1.1-SNAPSHOT</microprofile.fault-tolerance.impl.version>
+    <microprofile.fault-tolerance.impl.version>${project.version}</microprofile.fault-tolerance.impl.version>
     <microprofile.health.version>1.0</microprofile.health.version>
     <microprofile.health.impl.version>1.0.0</microprofile.health.impl.version>
     <microprofile.metrics.version>1.1</microprofile.metrics.version>
@@ -547,6 +550,7 @@
         <module>container</module>
         <module>server</module>
         <module>mp-jwt</module>
+        <module>mp-fault-tolerance</module>
         <module>examples</module>
         <module>assembly</module>
         <module>tck</module>
@@ -575,6 +579,7 @@
         <module>container</module>
         <module>server</module>
         <module>mp-jwt</module>
+        <module>mp-fault-tolerance</module>
         <module>assembly</module>
         <module>arquillian</module>
         <module>utils</module>
