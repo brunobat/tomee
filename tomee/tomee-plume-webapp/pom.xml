@@ -203,11 +203,7 @@
       <version>${microprofile.fault-tolerance.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.apache.geronimo.safeguard</groupId>
-      <artifactId>safeguard-impl</artifactId>
-      <version>${microprofile.fault-tolerance.impl.version}</version>
-    </dependency>
+
 
     <dependency>
       <groupId>org.eclipse.microprofile.health</groupId>

@@ -43,8 +43,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.geronimo.safeguard</groupId>
-            <artifactId>safeguard-impl</artifactId>
+            <groupId>org.apache.tomee</groupId>
+            <artifactId>mp-fault-tolerance</artifactId>
             <version>${microprofile.fault-tolerance.impl.version}</version>
             <scope>provided</scope>
         </dependency>
