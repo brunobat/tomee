@@ -13,6 +13,9 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import java.lang.reflect.Method;
+import java.util.stream.Stream;
+
+import static java.util.Objects.nonNull;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -50,10 +53,7 @@ public class FaultToleranceInterceptor {
     }
 
     private boolean isMethodSafeguarded(Method method) {
-        return AnnotationUtil.getAnnotation(method, Retry.class) != null ||
-                AnnotationUtil.getAnnotation(method, CircuitBreaker.class) != null ||
-                AnnotationUtil.getAnnotation(method, Timeout.class) != null ||
-                AnnotationUtil.getAnnotation(method, Fallback.class) != null ||
-                AnnotationUtil.getAnnotation(method, Bulkhead.class) != null;
+        return Stream.of(Retry.class, CircuitBreaker.class, Timeout.class, Fallback.class, Bulkhead.class)
+                .anyMatch(annotation -> nonNull(method.getAnnotation(annotation)));
     }
 }
