@@ -1,5 +1,6 @@
 package org.apache.tomee.microprofile.faulttolerance.cdi;
 
+import org.apache.tomee.microprofile.faulttolerance.engine.ExecutionManager;
 import org.eclipse.microprofile.faulttolerance.Bulkhead;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Fallback;
@@ -54,6 +55,7 @@ public class FaultToleranceInterceptor {
 
     private boolean isMethodSafeguarded(Method method) {
         return Stream.of(Retry.class, CircuitBreaker.class, Timeout.class, Fallback.class, Bulkhead.class)
-                .anyMatch(annotation -> nonNull(method.getAnnotation(annotation)));
+                .anyMatch(annotation -> nonNull(method.getAnnotation(annotation)) ||
+                        nonNull(method.getDeclaringClass().getAnnotation(annotation)));
     }
 }

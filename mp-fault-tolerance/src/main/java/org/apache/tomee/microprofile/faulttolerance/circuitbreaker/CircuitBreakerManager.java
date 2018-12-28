@@ -1,8 +1,4 @@
-package org.apache.tomee.microprofile.faulttolerance.retry;
-
-import javax.enterprise.inject.Vetoed;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+package org.apache.tomee.microprofile.faulttolerance.circuitbreaker;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -20,17 +16,5 @@ import java.util.concurrent.ConcurrentHashMap;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Vetoed
-public class RetryManager {
-
-    private final Map<String, RetryModel> retries = new ConcurrentHashMap<>();
-
-    RetryModel getRetryModel(final String name) {
-        return retries.get(name);
-    }
-
-    void addRetryModel(final String name,
-                       final RetryModel retryModel) {
-        retries.put(name, retryModel);
-    }
+public class CircuitBreakerManager {
 }
