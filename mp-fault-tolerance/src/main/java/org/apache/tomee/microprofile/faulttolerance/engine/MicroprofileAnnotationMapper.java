@@ -1,8 +1,4 @@
-package org.apache.tomee.microprofile.faulttolerance.cdi;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import javax.interceptor.InvocationContext;
+package org.apache.tomee.microprofile.faulttolerance.engine;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -20,9 +16,7 @@ import javax.interceptor.InvocationContext;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class ExecutionManager {
-
-    public Object execute(final InvocationContext invocationContext) {
-        throw new NotImplementedException();//TODO
+public class MicroprofileAnnotationMapper {
+    public static MicroprofileAnnotationMapper getInstance() {
     }
 }
