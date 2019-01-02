@@ -54,7 +54,7 @@ public class RetryModel {
 //                  final Retry retry, final FaultToleranceMetrics.Counter callsSucceededNotRetried,
 //                  final FaultToleranceMetrics.Counter callsSucceededRetried, final FaultToleranceMetrics.Counter callsFailed,
 //                  final FaultToleranceMetrics.Counter retries) {
-    private RetryModel(final boolean disabled,
+    public RetryModel(final boolean disabled,
                        final Retry retry) {
         this.disabled = disabled;
         this.abortOn = retry.abortOn();
@@ -101,6 +101,6 @@ public class RetryModel {
     private long nextPause() {
         final ThreadLocalRandom random = ThreadLocalRandom.current();
         return TimeUnit.NANOSECONDS
-                .toMillis(min(maxDuration, max(0, ((random.nextBoolean() ? 1 : -1) * delay) + random.nextLong(jitter))));
+                .toMillis(min(maxDuration, max(0, ((random.nextBoolean() ? 1 : -1) * delay) + random.nextLong(jitter))));// todo redo formula
     }
 }

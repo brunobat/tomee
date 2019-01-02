@@ -1,5 +1,12 @@
 package org.apache.tomee.microprofile.faulttolerance.engine;
 
+import org.apache.tomee.microprofile.faulttolerance.retry.RetryModel;
+import org.eclipse.microprofile.faulttolerance.Retry;
+
+import javax.enterprise.inject.Vetoed;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -16,7 +23,37 @@ package org.apache.tomee.microprofile.faulttolerance.engine;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@Vetoed
 public class MicroprofileAnnotationMapper {
+
+    private static final MicroprofileAnnotationMapper INSTANCE = new MicroprofileAnnotationMapper();
+
     public static MicroprofileAnnotationMapper getInstance() {
+        return INSTANCE;
     }
+
+    private static <T extends Annotation> T getAnnotation(final Method method,
+                                                          final Class<T> clazz) {
+        T annotation = method.getAnnotation(clazz);
+        if (annotation != null) {
+            return annotation;
+        } else {
+            return method.getDeclaringClass().getAnnotation(clazz);
+        }
+    }
+
+    public static String createKeyName(final Method method) {
+        return method.getDeclaringClass().getCanonicalName() + "." + method.getName();
+    }
+
+    public RetryModel mapRetry(final Method method) {
+        Retry retry = getAnnotation(method, Retry.class);
+        if (retry == null) {
+            return null;
+        }
+
+        return new RetryModel(false, retry);
+    }
+
+
 }

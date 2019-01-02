@@ -22,6 +22,7 @@ import org.apache.tomee.microprofile.faulttolerance.circuitbreaker.CircuitBreake
 import org.apache.tomee.microprofile.faulttolerance.engine.plan.ExecutionPlan;
 import org.apache.tomee.microprofile.faulttolerance.retry.RetryManager;
 import org.apache.tomee.microprofile.faulttolerance.retry.RetryModel;
+import org.apache.tomee.microprofile.faulttolerance.retry.RetryPlan;
 
 import javax.enterprise.inject.Vetoed;
 import javax.interceptor.InvocationContext;
@@ -52,23 +53,20 @@ public class ExecutionManager {
         this.executor = executor;
     }
 
-    public static String createName(Method method) {
-        return method.getDeclaringClass().getCanonicalName()+"."+method.getName();
-    }
-
     public Object execute(final InvocationContext invocationContext) {
         Method method = invocationContext.getMethod();
         return getExecutionPlan(method).execute(invocationContext::proceed, invocationContext);
     }
 
     private ExecutionPlan getExecutionPlan(Method method) {
-        final String name = createName(method);
-        return executionPlanMap.computeIfAbsent(name,key -> {
+        final String name = MicroprofileAnnotationMapper.createKeyName(method);
+        return executionPlanMap.computeIfAbsent(name, key -> {
 
             RetryModel retryModel = retryManager.getRetryModel(name);
-            if (retryDefinition == null) {
-                retryDefinition = createDefinition(name, method);
+            if (retryModel == null) {
+                retryModel = retryManager.createRetryModel(name, method);
             }
+            return new RetryPlan(name, retryModel);
         });
     }
 }
