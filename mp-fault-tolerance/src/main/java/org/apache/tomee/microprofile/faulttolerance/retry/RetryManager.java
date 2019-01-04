@@ -2,6 +2,7 @@ package org.apache.tomee.microprofile.faulttolerance.retry;
 
 import org.apache.tomee.microprofile.faulttolerance.engine.MicroprofileAnnotationMapper;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Vetoed;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -30,7 +31,7 @@ import static java.util.Objects.isNull;
 /**
  * This will cache Retry model definitions by method
  */
-@Vetoed
+@ApplicationScoped
 public class RetryManager {
 
     private final Map<String, RetryModel> retries = new ConcurrentHashMap<>();

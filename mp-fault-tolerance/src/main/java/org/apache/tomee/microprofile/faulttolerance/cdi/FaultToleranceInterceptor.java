@@ -37,7 +37,7 @@ import static java.util.Objects.nonNull;
 
 @Interceptor
 @FaultToleranceEnabled
-@Priority(1)
+@Priority(400)
 @Dependent
 public class FaultToleranceInterceptor {
 

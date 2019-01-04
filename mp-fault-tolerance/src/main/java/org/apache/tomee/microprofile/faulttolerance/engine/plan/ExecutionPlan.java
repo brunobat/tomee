@@ -1,7 +1,6 @@
 package org.apache.tomee.microprofile.faulttolerance.engine.plan;
 
 import javax.interceptor.InvocationContext;
-import java.util.concurrent.Callable;
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -20,5 +19,5 @@ import java.util.concurrent.Callable;
  * limitations under the License.
  */
 public interface ExecutionPlan {
-    <T> T execute(Callable<T> callable, InvocationContext invocationContext);
+    Object execute(InvocationContext invocationContext) throws Exception;
 }

@@ -55,7 +55,7 @@ public class RetryModel {
 //                  final FaultToleranceMetrics.Counter callsSucceededRetried, final FaultToleranceMetrics.Counter callsFailed,
 //                  final FaultToleranceMetrics.Counter retries) {
     public RetryModel(final boolean disabled,
-                       final Retry retry) {
+                      final Retry retry) {
         this.disabled = disabled;
         this.abortOn = retry.abortOn();
         this.retryOn = retry.retryOn();
@@ -85,11 +85,15 @@ public class RetryModel {
         }
     }
 
-    private boolean abortOn(final Exception re) {
+    public int getMaxRetries() {
+        return maxRetries;
+    }
+
+    public boolean abortOn(final Exception re) {
         return matches(abortOn, re);
     }
 
-    private boolean retryOn(final Exception re) {
+    public boolean retryOn(final Exception re) {
         return matches(retryOn, re);
     }
 
@@ -98,9 +102,13 @@ public class RetryModel {
         return list.length > 0 && Stream.of(list).anyMatch(it -> it.isInstance(re) || it.isInstance(re.getCause()));
     }
 
-    private long nextPause() {
+    public long nextPause() {
         final ThreadLocalRandom random = ThreadLocalRandom.current();
         return TimeUnit.NANOSECONDS
                 .toMillis(min(maxDuration, max(0, ((random.nextBoolean() ? 1 : -1) * delay) + random.nextLong(jitter))));// todo redo formula
+    }
+
+    public long getMaxDuration() {
+        return maxDuration;
     }
 }

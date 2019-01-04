@@ -1,5 +1,11 @@
 package org.apache.tomee.microprofile.faulttolerance.retry;
 
+import org.apache.tomee.microprofile.faulttolerance.engine.plan.ExecutionPlan;
+import org.eclipse.microprofile.faulttolerance.exceptions.FaultToleranceException;
+
+import javax.interceptor.InvocationContext;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,6 +24,60 @@ package org.apache.tomee.microprofile.faulttolerance.retry;
  */
 
 
-public class RetryPlan {
+public class RetryPlan implements ExecutionPlan {
 
+
+    private final String methodName;
+    private final RetryModel retryModel;
+    private final RetryState retryState;
+
+    public RetryPlan(final String name,
+                     final RetryModel retryModel) {
+
+        final long now = System.nanoTime();
+        this.methodName = name;
+        this.retryModel = retryModel;
+        this.retryState = new RetryState(0, now, now + retryModel.getMaxDuration());
+    }
+
+    @Override
+    public Object execute(final InvocationContext invocationContext) throws Exception {// TODO this is the sync impl
+
+        while (retryState.retryCount <= retryModel.getMaxRetries()) {
+            try {
+                final Object proceed = invocationContext.proceed();
+                return proceed;
+            } catch (final Exception e) {
+
+                if (retryModel.abortOn(e) ||
+                        retryState.retryCount >= retryModel.getMaxRetries() ||
+                        System.nanoTime() >= retryState.endTime) {
+                    throw e;
+                }
+                if (!retryModel.retryOn(e)) {
+                    throw e;
+                }
+                retryState.retryCount++;
+                if (retryState.retryCount > retryModel.getMaxRetries()) {
+                    throw e;
+                }
+                TimeUnit.MILLISECONDS.sleep(retryModel.nextPause());
+            }
+        }
+        throw new FaultToleranceException("Inaccessible normally, here for compilation");
+    }
+
+    private static class RetryState {
+        private final long startTime;
+        private final long endTime;
+        private int retryCount;
+
+        public RetryState(final int retryCount,
+                          final long startTime,
+                          final long endTime) {
+            this.retryCount = retryCount;
+            this.startTime = startTime;
+            this.endTime = endTime;
+        }
+    }
 }
