@@ -124,7 +124,5 @@ public class FaultToleranceExtension implements Extension {
     private Stream<Class<? extends Annotation>> faultToleranceAnnotations() {
         return Stream.of(Asynchronous.class, Bulkhead.class, CircuitBreaker.class,
                 Fallback.class, Retry.class, Timeout.class);
-
-
     }
 }

@@ -1,4 +1,4 @@
-package org.apache.tomee.microprofile.faulttolerance.engine.plan;
+package org.apache.tomee.microprofile.faulttolerance.engine;
 
 import javax.interceptor.InvocationContext;
 

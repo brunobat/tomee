@@ -1,6 +1,6 @@
 package org.apache.tomee.microprofile.faulttolerance.retry;
 
-import org.apache.tomee.microprofile.faulttolerance.engine.plan.ExecutionPlan;
+import org.apache.tomee.microprofile.faulttolerance.engine.ExecutionPlan;
 import org.eclipse.microprofile.faulttolerance.exceptions.FaultToleranceException;
 
 import javax.interceptor.InvocationContext;

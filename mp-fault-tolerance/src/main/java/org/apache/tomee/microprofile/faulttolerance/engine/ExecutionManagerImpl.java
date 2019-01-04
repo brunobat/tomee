@@ -19,7 +19,6 @@ package org.apache.tomee.microprofile.faulttolerance.engine;
 
 import org.apache.tomee.microprofile.faulttolerance.bulkhead.BulkheadManager;
 import org.apache.tomee.microprofile.faulttolerance.circuitbreaker.CircuitBreakerManager;
-import org.apache.tomee.microprofile.faulttolerance.engine.plan.ExecutionPlan;
 import org.apache.tomee.microprofile.faulttolerance.retry.RetryManager;
 import org.apache.tomee.microprofile.faulttolerance.retry.RetryModel;
 import org.apache.tomee.microprofile.faulttolerance.retry.RetryPlan;

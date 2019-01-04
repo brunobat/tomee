@@ -1,15 +1,5 @@
 package org.apache.tomee.microprofile.faulttolerance.retry;
 
-import org.apache.tomee.microprofile.faulttolerance.engine.MicroprofileAnnotationMapper;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Vetoed;
-import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import static java.util.Objects.isNull;
-
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -27,6 +17,14 @@ import static java.util.Objects.isNull;
  * limitations under the License.
  */
 
+import org.apache.tomee.microprofile.faulttolerance.engine.MicroprofileAnnotationMapper;
+
+import javax.enterprise.context.ApplicationScoped;
+import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static java.util.Objects.isNull;
 
 /**
  * This will cache Retry model definitions by method
