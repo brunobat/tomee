@@ -40,20 +40,8 @@ public class RetryModel {
 
     private final Class<? extends Throwable>[] retryOn;
 
-//    private final FaultToleranceMetrics.Counter callsSucceededNotRetried;
-//
-//    private final FaultToleranceMetrics.Counter callsSucceededRetried;
-//
-//    private final FaultToleranceMetrics.Counter callsFailed;
-//
-//    private final FaultToleranceMetrics.Counter retries;
-
     private final boolean disabled;
 
-    //    private Model(final boolean disabled,
-//                  final Retry retry, final FaultToleranceMetrics.Counter callsSucceededNotRetried,
-//                  final FaultToleranceMetrics.Counter callsSucceededRetried, final FaultToleranceMetrics.Counter callsFailed,
-//                  final FaultToleranceMetrics.Counter retries) {
     public RetryModel(final boolean disabled,
                       final Retry retry) {
         this.disabled = disabled;
@@ -63,10 +51,6 @@ public class RetryModel {
         this.maxRetries = retry.maxRetries();
         this.delay = retry.delayUnit().getDuration().toNanos() * retry.delay();
         this.jitter = retry.jitterDelayUnit().getDuration().toNanos() * retry.jitter();
-//        this.callsSucceededNotRetried = callsSucceededNotRetried;
-//        this.callsSucceededRetried = callsSucceededRetried;
-//        this.callsFailed = callsFailed;
-//        this.retries = retries;
 
         if (maxRetries < 0) {
             throw new FaultToleranceDefinitionException("max retries can't be negative");
@@ -104,8 +88,9 @@ public class RetryModel {
 
     public long nextPause() {
         final ThreadLocalRandom random = ThreadLocalRandom.current();
+        final long randomFromJiter = jitter == 0 ? 0 : random.nextLong(jitter);
         return TimeUnit.NANOSECONDS
-                .toMillis(min(maxDuration, max(0, ((random.nextBoolean() ? 1 : -1) * delay) + random.nextLong(jitter))));// todo redo formula
+                .toMillis(min(maxDuration, max(0, delay + randomFromJiter)));
     }
 
     public long getMaxDuration() {
